@@ -1,0 +1,78 @@
+<%- include('../layouts/admin-header.ejs') %>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Dashboard</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% 
+                if(posts.length > 0) {
+                    var i = 1;
+                    posts.forEach(function(post) {
+                        %>
+                        <tr>
+                            <td><%= i++; %></td>
+                            <td><%= post.title %></td>
+                            <td><%= post.content %></td>
+                            <td>
+                                <img src="<%= post.image %>" alt="<%= post.image %>" width="80px" id="image">
+                            </td>
+                            <td>
+                                <a href="/view-post/<%= post._id %>" class="fa fa-solid fa-eye editPost" style="color: rgb(13, 149, 203); font-size: 24px; margin-right: 10px;"></a>
+                                <a href="/edit-post/<%= post._id %>" class="fa fa-solid fa-edit editPost" style="color: green; font-size: 24px; margin-right: 10px;"></a>
+                                <a href="#" class="fa fa-solid fa-trash deletePost" data-id="<%= post._id %>" style="color: red; font-size: 24px;"></a>
+                            </td>
+                        </tr>
+                        <%
+                    })
+                }
+                else{
+                    %>
+                    <tr>
+                        <td colspan="4">No Posts Found!</td>
+                    </tr>
+                    <%
+                }
+                %>
+            </tbody>
+        </table>
+    
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.deletePost').click(function(){
+                    var id = $(this).attr('data-id');
+                    var obj = $(this);
+                    $.ajax({
+                        url: "/delete-post",
+                        type: "POST",
+                        data: { id },
+                        success: function(post){
+                            if(post.success === true){
+                                var socket = io();
+                                socket.emit("delete_post", id)
+
+                                $(obj).parent().parent().remove();
+                                alert(post.msg);
+                            }
+                            else{
+                                alert(post.msg);
+                            }
+                        },
+                    })
+                });
+            })    
+        </script>
+
+<%- include('../layouts/admin-footer.ejs') %>

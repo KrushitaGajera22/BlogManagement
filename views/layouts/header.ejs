@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Blog Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js" integrity="sha512-zoJXRvW2gC8Z0Xo3lBbao5+AS3g6YWr5ztKqaicua11xHo+AvE1b0lT9ODgrHTmNUxeCw0Ry4BGRYZfXu70weg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container px-5">
+        <a class="navbar-brand" href="#!">Blog Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+              <li class="nav-item logout"><a class="nav-link" href="/user-logout">Logout</a></li>
+              <li class="nav-item login"><a class="nav-link" href="/login">Login</a></li>
+              <li class="nav-item register"><a class="nav-link" href="/register">Register</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      function getCookie(name) {
+        let matches = document.cookie.match(
+          new RegExp(
+            "(?:^|; )" +
+              name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+              "=([^;]*)"
+          )
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+      var userData = null;
+      var userId = null;
+      if(getCookie('user') === undefined) {
+        document.getElementsByClassName('logout')[0].style.display = 'none';
+        document.getElementsByClassName('login')[0].style.display = 'block';
+        document.getElementsByClassName('register')[0].style.display = 'block';
+      }
+      else{
+        userData = JSON.parse(getCookie('user'));
+        userId = userData._id
+        document.getElementsByClassName('logout')[0].style.display = 'block';
+        document.getElementsByClassName('login')[0].style.display = 'none';
+        document.getElementsByClassName('register')[0].style.display = 'none';
+      }
+      console.log(userId);
+    </script>

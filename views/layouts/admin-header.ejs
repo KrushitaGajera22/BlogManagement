@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Blog Management Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js" integrity="sha512-zoJXRvW2gC8Z0Xo3lBbao5+AS3g6YWr5ztKqaicua11xHo+AvE1b0lT9ODgrHTmNUxeCw0Ry4BGRYZfXu70weg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+	  		<h1><a href="/dashboard" class="logo">Admin</a></h1>
+        <ul class="list-unstyled components mb-5">
+          <li>
+              <a href="/dashboard"><span class="fa fa-user mr-3"></span> Dashboard</a>
+          </li>
+          <li>
+            <a href="/create-post"><span class="fa fa-sticky-note-o mr-3"></span> Create Post</a>
+          </li>
+          <li>
+            <a href="/settings"><span class="fa fa-cog mr-3"></span> Settings</a>
+          </li>
+          <li>
+            <a href="/logout"><span class="fa fa-sign-out mr-3"></span> logout</a>
+          </li>
+        </ul>
+
+    	</nav>

@@ -1,0 +1,45 @@
+<%- include('./layouts/header.ejs') %>
+
+<link rel="stylesheet" href="/css/contact.css">
+<div class="container1">
+    <form id="contact">
+        <h3>Contact Us!</h3>
+        <input type="text" id="name" placeholder="Enter Your Name" required>
+        <input type="email" id="email" placeholder="Enter Your Email" required>
+        <input type="text" id="subject" placeholder="Enter Your Subject" required>
+        <textarea id="message" rows="4" placeholder="How can we help you?"></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#contact').submit(function(event){
+            event.preventDefault();
+
+            let formData = {
+                name: $('#name').val(),
+                email: $('#email').val(),
+                subject: $('#subject').val(),
+                message: $('#message').val(),
+            }
+            var obj = $(this);
+            
+            $.ajax({
+                url: "/contact",
+                type: "POST",
+                data: formData,
+                success: function (data) {
+                  if (data.success == true) {
+                    $(obj)[0].reset();
+                    alert(data.msg);
+                  } else {
+                    alert(data.msg);
+                  }
+              },
+            });
+        })
+    })
+</script>
+
+<%- include('./layouts/footer.ejs') %>
